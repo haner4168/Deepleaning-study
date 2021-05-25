@@ -41,7 +41,7 @@ def _update_vocab(txt):
             char_to_id[char] = tmp_id
             id_to_char[tmp_id] = char
 
-
+#어휘 사전 생성
 id_to_char = {}
 char_to_id = {}
 for i in range(len(questions)):
@@ -49,6 +49,17 @@ for i in range(len(questions)):
     _update_vocab(q)
     _update_vocab(a)
 
+
+### 넘파이 배열 생성
+x = numpy.zeros((len(questions), len(questions[0])), dtype=numpy.int)
+t = numpy.zeros((len(questions), len(answers[0])), dtype=numpy.int)
+
+for i, sentence in enumerate(questions):
+    for c in list(sentence) : 
+      x[i] = char_to_id[c]
+for i, sentence in enumerate(answers):
+    for c in list(sentence) : 
+      t[i] = char_to_id[c]
 
 ### 뒤섞기
 seed = 1000
